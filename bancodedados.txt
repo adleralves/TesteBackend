@@ -1,0 +1,43 @@
+# Tabela Usuario
+
+create table usuario (
+    id bigint auto_increment,
+    nome varchar(30),
+    cpf varchar(11),
+    email varchar(30),
+    senha varchar(30),
+    primary key (id) 
+);
+
+# Tabela Produto
+
+create table produto(
+    id bigint auto_increment,
+    nome varchar(30),
+    preco decimal(10,2),
+    quantidade int,
+    primary key(id)
+);
+
+
+# Tabela ItemVenda
+
+create table itemvenda(
+    id bigint auto_increment,
+    produto_id bigint not null,
+    valor decimal(10,2),
+    primary key(id),
+    foreign key fk_produto(produto_id) references produto(id)
+);
+
+# Tabela Venda
+
+create table venda(
+    id bigint auto_increment,
+    usuario_id bigint not null,
+    itemvenda_id bigint not null,
+    valor decimal(10,2),
+    primary key(id),
+    foreign key fk_usuario(usuario_id) references usuario(id),
+    foreign key fk_itemvenda(itemvenda_id) references itemvenda(id)
+);
